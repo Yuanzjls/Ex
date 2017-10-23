@@ -1,6 +1,11 @@
 clear
 %generate a random dataset with 2 feature sets
-D = [randn(2000,2)*0.75+ones(2000,2);randn(2000,2)*0.55-ones(2000,2)];
+%D = [randn(2000,2)*0.75+ones(2000,2);randn(2000,2)*0.55-ones(2000,2)];
+D = xlsread('Iris.xlsx');;
+
+I = statset ('Display','iter');
+[idx,C,sumd,d,midx,info] = kmedoids(D,2,'Distance','cityblock','Options',I);
+
 %Load the iris dataset (this part must be used instead of the above line
 %for loading the data in experiments
 %D = csvread('iris.csv');
