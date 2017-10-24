@@ -3,9 +3,6 @@ clear
 %D = [randn(2000,2)*0.75+ones(2000,2);randn(2000,2)*0.55-ones(2000,2)];
 D = xlsread('Iris.xlsx');;
 
-I = statset ('Display','iter');
-[idx,C,sumd,d,midx,info] = kmedoids(D,2,'Distance','cityblock','Options',I);
-
 %Load the iris dataset (this part must be used instead of the above line
 %for loading the data in experiments
 %D = csvread('iris.csv');
@@ -16,8 +13,9 @@ plot(D(:,1),D(:,2),'.');
 D_Norm = (D-min (D(:))) ./ (max(D(:))) ;
 %show the number of iterations on the command window
 I = statset ('Display','iter');
+D_Norm = D_Norm(:,1:2);
 %cluster the data using the kmedoids command
-[idx,C,sumd,d,midx,info] = kmedoids(D_Norm,2,'Distance','cityblock','Options',I);
+[idx,C,sumd,d,midx,info] = kmedoids(D_Norm,4,'Distance','cityblock','Options',I);
 %save all the achieved results as txt files
 save kmedoids_idx.txt idx -ascii -double
 save kmedoids_C.txt C -ascii -double
